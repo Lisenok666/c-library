@@ -4,6 +4,7 @@
 	Authora Daniil leskevich and  Oledg Nicolaev
 	Created by NAMELESS TEAM 
 */
+//Matbe some names and function would be changing in future
 #pragma once
 
 typedef struct slist_entry* pslist_entry;
