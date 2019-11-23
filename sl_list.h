@@ -2,6 +2,7 @@
 typedef struct slist_entry* pslist_entry;
 typedef struct slist* pslist;
 
+
 typedef struct slist_entry
 {
 	pslist_entry next;
@@ -9,25 +10,42 @@ typedef struct slist_entry
 } list;
 
 
-struct slist
+typedef struct slist
 {
 	int list_size; // sugar
 	pslist_entry head;
-};
-pslist slist_new(list *LISTOK) {
-    int elements;
+} work_list;
+pslist slist_new(void) {
+    list* LISTOK;
+    int elements = 0;
     printf("How many alements of list you need\n");
-    scanf("%d", &elements);
+    scanf_s("%d", &elements);
     LISTOK = (list*)malloc(elements * sizeof(list));
+    if (NULL == LISTOK)
+    {
+        printf("Not enough memmory\n");
+        return -1;
+    }
+    int last_element = elements - 1;
     for (int i = 0; i < elements; ++i)
     {
-        int value = 0;
+        int value_list = 0;
         printf("Write value\n");
-        scanf("%d", value);
-        LISTOK->value = value;
-        LISTOK->next = NULL;
-        list* temp_address = LISTOK;
+        scanf_s("%d", &value_list);
+        (LISTOK[i]).value = value_list;
+        if (i != last_element)
+        {
+            (LISTOK[i]).next = (LISTOK + i + 1);
+        }
+        else
+        {
+            (LISTOK[i]).next = NULL;
+        }
     }
+    work_list our_list;
+    (&our_list)->head = LISTOK;
+    (&our_list)->list_size = elements;
+    return (&our_list);
 };
 
 /*
@@ -40,9 +58,9 @@ void slist_delete(pslist list) {};
 /*
  * TODO
  */
-int slist_insert(pslist list, int value) {};
+//int slist_insert(pslist list, int value) { };
 
-int slist_remove(pslist list, int value) {};
+//int slist_remove(pslist list, int value) {};
 
-void slist_print(pslist list) {
+void slist_print(pslist work_list) {
 };

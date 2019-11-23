@@ -5,11 +5,12 @@
 	Created
 */
 #include <stdio.h>
+#include <malloc.h>
 #include "sl_list.h"
 
 int  main(void)
 {
-	list ara;
+    work_list *a = slist_new();
 	return 0;
 
 }
