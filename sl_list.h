@@ -10,11 +10,12 @@ typedef struct slist_entry
 } list;
 
 
-typedef struct slist
+struct slist
 {
 	int list_size; // sugar
 	pslist_entry head;
 } work_list;
+
 pslist slist_new(void) {
     list* LISTOK;
     int elements = 0;
@@ -42,25 +43,60 @@ pslist slist_new(void) {
             (LISTOK[i]).next = NULL;
         }
     }
-    work_list our_list;
-    (&our_list)->head = LISTOK;
-    (&our_list)->list_size = elements;
-    return (&our_list);
+
+    pslist our_list;
+    our_list = &work_list;
+    our_list->head = LISTOK;
+    our_list->list_size = elements;
+    return our_list;
 };
 
+/*
+ * TODO
+ */
+int slist_insert(pslist listok, int value) {
+    list* temp_list = NULL;
+    temp_list = (list*)malloc(1 * sizeof(list));
+    if (NULL == temp_list)
+    {
+        printf("Not enough memmory\n");
+        return -1;
+    }
+    temp_list->value = value;
+    temp_list->next = listok->head;
+    listok->head = temp_list;
+    listok->list_size ++;
+    return 0;
+};
+
+//int slist_remove(pslist listok, int value) {};
+
+void slist_print(pslist listok) {
+    //printf("%p\n", listok);
+    int weight = listok->list_size;
+    printf("Programm start write %d values\n", weight);
+    list* temp_address;
+    temp_address = listok->head;
+    for (int i = 0; i < weight; ++i) {
+        printf("Value of elemeny number %d = %d\n", i+1, temp_address->value);
+        temp_address = temp_address->next;
+    }
+};
 /*
  * Deletes list and all the elements
  * Params: list - pointer to the list
  * Returns none
  */
-void slist_delete(pslist list) {};
+void slist_delete(pslist listok) {
+    int weight = listok->list_size;
+    //free(listok->list_size);
+    list* temp_address_1;
+    list* temp_address_2;
+    temp_address_1 = listok->head;
+    for (int i = 0; i < weight; ++i) {
+        temp_address_2 = temp_address_1->next;
+        temp_address_1 = temp_address_2;
+    }
+    free(listok);
 
-/*
- * TODO
- */
-//int slist_insert(pslist list, int value) { };
-
-//int slist_remove(pslist list, int value) {};
-
-void slist_print(pslist work_list) {
 };
