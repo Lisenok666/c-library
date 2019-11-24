@@ -22,26 +22,13 @@ struct slist
 	pslist_entry head;
 };
 
-/*
- * Creates an empty list
- * Params: none
- * Returns pointer to the list
- */
 pslist slist_new(void);
 
-/*
- * Deletes list and all the elements
- * Params: list - pointer to the list
- * Returns none
- */
 void slist_delete(pslist list);
 
-/*
- * TODO
- */
 int slist_insert(pslist list, int value);
 
-int slist_remove(pslist list, int value);
+//int slist_remove(pslist list, int value);
 
 void slist_print(pslist list);
 
