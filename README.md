@@ -1,7 +1,7 @@
 # c-library
 
 Authors
-Leskecvich Daniil
+Leskecvich Daniil and
 Oleg Nicolaev
 
 TEAM mameber 1: Leskecvich Daniil
