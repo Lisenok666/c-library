@@ -1,6 +1,13 @@
+/*
+    This file sl_list.h
+    single linked list header
+    Author Leskecvich Daniil and Oleg Nicolaev
+    Created by NAMELESS TEAM
+*/
 #pragma once
 typedef struct slist_entry* pslist_entry;
 typedef struct slist* pslist;
+int k = 0;  //indefecate k = 1 when we have active list in our programm, k = 0 we haven't active list
 
 
 typedef struct slist_entry
@@ -12,50 +19,41 @@ typedef struct slist_entry
 
 typedef struct slist
 {
-	int list_size; // sugar
+	int list_size; 
 	pslist_entry head;
 } work_list;
 
-pslist slist_new(void) {
-    list* LISTOK = NULL;
-    LISTOK = (list*)malloc(0 * sizeof(list));
-    /*int elements = 0;
-    printf("How many alements of list you need\n");
-    scanf_s("%d", &elements);
-    LISTOK = (list*)malloc(elements * sizeof(list));
-    if (NULL == LISTOK)
-    {
-        printf("Not enough memmory\n");
-        return -1;
-    }
-    int last_element = elements - 1;
-    for (int i = 0; i < elements; ++i)
-    {
-        int value_list = 0;
-        printf("Write value\n");
-        scanf_s("%d", &value_list);
-        (LISTOK[i]).value = value_list;
-        if (i != last_element)
-        {
-            (LISTOK[i]).next = (LISTOK + i + 1);
-        }
-        else
-        {
-            (LISTOK[i]).next = NULL;
-        }
-    }*/
+/*function create new list and return pointer to it*/
 
+pslist slist_new(void) {
+    if (k)
+    {
+        printf("You must delete previos list, before create new\n");
+        return NULL;
+    }
     work_list* our_list  = NULL;
-    our_list = (work_list*) malloc(0 * sizeof(work_list));
-    our_list->head = LISTOK;
+    our_list = (work_list*) malloc(1 * sizeof(work_list));
+    if (NULL == our_list)
+    {
+        return NULL;
+    }
+    our_list->head = NULL;
     our_list->list_size = 0;
+    k++;
     return our_list;
 };
 
 /*
- * TODO
+ * add to the stsrt of list element with value frim console
+ * return 0
  */
 int slist_insert(pslist listok, int value) {
+    if (NULL == listok || k == 0)
+    {
+        printf("You must firstly create list\n");
+        return -2;
+    }
+    int k = 0;
     list* temp_list = NULL;
     temp_list = (list*)malloc(1 * sizeof(list));
     if (NULL == temp_list)
@@ -70,10 +68,17 @@ int slist_insert(pslist listok, int value) {
     return 0;
 };
 
-//int slist_remove(pslist listok, int value) {};
+/*
+* write values values from list
+* return none
+*/
 
 void slist_print(pslist listok) {
-    //printf("%p\n", listok);
+    if (NULL == listok || 0 == k)
+    {
+        printf("You must firstly create list\n");
+       // return -2;
+    }
     int weight = listok->list_size;
     printf("Programm start write %d values\n", weight);
     list* temp_address;
@@ -99,5 +104,5 @@ void slist_delete(pslist listok) {
         temp_address_1 = temp_address_2;
     }
     free(listok);
-
+    k--;
 };

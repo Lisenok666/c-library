@@ -6,23 +6,7 @@
 */
 #pragma once
 #include"sl_list_library.c"
-/*typedef struct slist_entry* pslist_entry;
-typedef struct slist* pslist;
 
-
-typedef struct slist_entry
-{
-    pslist_entry next;
-    int value;
-} list;
-
-
-struct slist
-{
-    int list_size; // sugar
-    pslist_entry head;
-} work_list;
-*/
 /*
  * Creates an empty list
  * Params: none
@@ -38,11 +22,15 @@ pslist slist_new(void);
 void slist_delete(pslist list);
 
 /*
- * TODO
+ * add to the stsrt of list element with value frim console
+ * return 0
  */
 int slist_insert(pslist list, int value);
 
-//int slist_remove(pslist list, int value);
+/*
+* write values values from list
+* return none
+*/
 
 void slist_print(pslist list);
 
