@@ -39,13 +39,9 @@ struct search_tree* new_tree(long long int item, char * last_name, long long int
 
 struct search_tree* insert(struct search_tree* tree, long long int key, char* last_name, long long int number)
 {
-    if (tree != NULL)
-    {
-        printf("%s %lld\n", tree->last_name, tree->number);
-    }
     if (tree == NULL)
     {
-        printf("OK_1\n");
+        printf("OK\n");
         return new_tree(key, last_name, number);
     }
     if (key == tree->key)
@@ -85,7 +81,7 @@ void dfs(struct search_tree* tree, long long int key)
     }
 
 }
-void Hashing(struct search_tree* tree, int action)
+struct search_tree*  Hashing(struct search_tree* tree, int action)
 {
     long long int item = 0, number = 0;
     unsigned int N = 1, delta = 1, i = 0;
@@ -100,24 +96,25 @@ void Hashing(struct search_tree* tree, int action)
     }
     //printf("%s1\n", brace);
     brace[i] = '\0';
-    printf("%lld %s %lld\n",item, brace, number);
+    //printf("%lld %s %lld\n",item, brace, number);
     if (action)
     {
         for (int j = 0; j < 7; j++)
         {
             int temp = getchar() - '0';
             number = number * 10 + temp;
-            printf("%lld\n", number);
+            //printf("%lld\n", number);
         }
         tree = insert(tree, item, brace, number);
+        return tree;
         //printf("%s\n", tree->last_name);
     }
     else
     {
-        printf("\n work1 \n");
+       // printf("\n work1 \n");
         dfs(tree, item);
     }
-
+    return tree;
 }
 
 int main(void)
@@ -147,10 +144,13 @@ int main(void)
         }
         else if (strcmp(brace, "INSERT") == 0)
         {
-            Hashing(tree, 1);
-            printf("%s\n", tree->last_name);
+            tree = Hashing(tree, 1);
+            //printf("%s\n", tree->last_name);
         }
-    } while (getchar() != ' ' && getchar() != '.');
+        if (getchar() == '.') {
+            return 0;
+        }
+    } while (getchar());
     printf("\n work \n");
     return 0;
 }
