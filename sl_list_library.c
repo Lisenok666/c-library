@@ -5,7 +5,7 @@
     Created by NAMELESS TEAM
 */
 #pragma once
-typedef struct slist_entry* pslist_entry;
+/*typedef struct slist_entry* pslist_entry;
 typedef struct slist* pslist;
 int k = 0;  //indefecate k = 1 when we have active list in our programm, k = 0 we haven't active list
 
@@ -22,7 +22,7 @@ typedef struct slist
 	int list_size; 
 	pslist_entry head;
 } work_list;
-
+*/
 /*function create new list and return pointer to it*/
 
 pslist slist_new(void) {
