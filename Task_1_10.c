@@ -1,4 +1,10 @@
-﻿#define _CRT_SECURE_NO_WARNINGS
+﻿/*
+	This file TASsk_1_10
+	task ten (databese with last name and numbers)
+	Authora Daniil leskevich and  Oledg Nicolaev
+	Created by NAMELESS TEAM 
+*/
+#define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h> 
 #include<stdlib.h> 
 #include <string.h>
