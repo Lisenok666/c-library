@@ -34,8 +34,57 @@ struct search_tree* new_tree(long long int item, char * last_name, long long int
 
 //struct search_tree* wfs(struct search_tree* tree, int key) {}
 
-//
-//void delete_pare(struct search_tree* tree, long long int key) {}
+
+void delete_tree(struct search_tree* tree)
+{
+    if (tree != NULL)
+    {
+        if (tree->left != NULL)
+        {
+            delete_tree(tree->left);
+        }
+        if (tree->right != NULL)
+        {
+            delete_tree(tree->right);
+        }
+        free(tree);
+    }
+}
+
+//struct search_tree* wfs(struct search_tree* tree, int key) {}
+
+struct search_tree* delete_pare(struct search_tree* tree, int key)
+{
+    //struct search_tree* temp = tree;
+
+    if (tree == NULL)
+        return tree;
+
+    if (key < tree->key)
+    {
+        tree->left = delete_pare(tree->left, key);
+    }
+    else if (key > tree->key)
+    {
+        tree->right = delete_pare(tree->right, key);
+    }
+    else if (tree->left != NULL && tree->right != NULL)
+    {
+        tree->key = (tree->right)->key;
+        tree->right = delete_pare(tree, tree->right->key);
+    }
+    else if (tree->left != NULL)
+    {
+
+        tree = tree->left;
+    }
+    else
+    {
+        tree = tree->right;
+    }
+
+    return tree;
+}
 
 struct search_tree* insert(struct search_tree* tree, long long int key, char* last_name, long long int number)
 {
