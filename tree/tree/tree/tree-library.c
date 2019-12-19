@@ -8,7 +8,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<stdio.h> 
 #include<stdlib.h> 
-#include "Header_tree.h"
+//#include "Header_tree.h"
 
 /*
  * Create tree
@@ -29,7 +29,26 @@ struct search_tree* new_tree(int item)
     return temp;
 }
 
-
+/*
+ * delete tree
+ * Params: pointer to tree
+ * Returns none
+ */
+void delete_tree(struct search_tree* tree) 
+{
+    if (tree != NULL) 
+    {
+        if (tree->left != NULL)
+        {
+            delete_tree(tree->left);
+        }
+        if (tree->right != NULL)
+        {
+            delete_tree(tree->right);
+        }
+        free(tree);
+    }
+}
 
 //struct search_tree* wfs(struct search_tree* tree, int key) {}
 
@@ -37,7 +56,7 @@ struct search_tree* delete_pare(struct search_tree* tree, int key)
 {
     //struct search_tree* temp = tree;
 
-    /*if (tree == NULL)
+    if (tree == NULL)
         return tree;
 
     if (key < tree->key)
@@ -46,11 +65,11 @@ struct search_tree* delete_pare(struct search_tree* tree, int key)
     }
     else if (key > tree->key)
     {
-        tree->right = DeleteNode(tree->right, key);
+        tree->right = delete_pare(tree->right, key);
     }
     else if (tree->left != NULL && tree->right != NULL)
     {
-        tree->key = Minimum(tree->right)->key;
+        tree->key = (tree->right)->key;
         tree->right = delete_pare(tree, tree->right->key);
     }
     else if (tree->left != NULL)
@@ -63,7 +82,7 @@ struct search_tree* delete_pare(struct search_tree* tree, int key)
         tree = tree->right;
     }
 
-    return tree;*/
+    return tree;
 }
 /*
  * Insert elements in tree, create new_tree if tree == NULL
